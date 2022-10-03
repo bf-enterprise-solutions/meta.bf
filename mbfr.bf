@@ -1,21 +1,3 @@
-[mbfr.bf -- right-offseting embeddable meta-interpreter for brainfuck.
-
- Simply copy-paste the code below this commentary into your program,
- making sure that the memory looks like this:
-
- [N] [0] [0] [F] [BF code to interpret...] [0]
-  ^ pointer here
-
- - where N is the number of cells to offset starting from N to the
-   right.
-
- - and F is the case flag/instruction pointer that should be initially
-   set to zero.
-
-  ASCII:   93  91  62  60  46  45  44  43
-  char:    ]   [   >   <   .   -   ,   +
-
- Code starts here:]
 >>>[-] ; move to case flag/instruction pointer and empty it
 > ; to the instruction
 ;; interpreter switch/loop

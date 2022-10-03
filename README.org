@@ -1,0 +1,41 @@
+#+TITLE:MBF—(embeddable) meta-interpreter for Brainfuck
+
+MBF follows [[https://github.com/maksimKorzh/dbfi][Daniel Christofani's DBFI]] in being a Brainfuck interpreter written in Brainfuck... with a significant difference of being a meta-circular interpreter i.e., the interpreter using the constructs used to program the interpreter itself, for the interpreted language. Contrary to DBFI,
+- MBF reads input from the same places the Brainfuck interpreter/compiler running MBF does read it from.
+- Same for output.
+- MBF does not alter the memory layout of your program (except for the layout of the code you make it execute).
+
+With these properties, you can embed MBF into your BF program and enable it to read and execute arbitrary BF code with the same privileges as the code of the program itself and in the same memory cells.
+
+MBF is already used as-is in [[https://github.com/aartaka/bfed][BFED]], Brainfuck-based UNIX ed re-implementation (by yours truly), and is likely to be used for scripting in the upcoming Brainfuck-based operating system (follow me to get notified of when I complete and publish that).
+
+* How MBF works
+
+As for any sufficiently complex copy-paste-able Brainfuck program, MBF requires a certain memory layout for the values it uses. The layout is:
+
+#+begin_src 
+|0|N|0|0|F|BF...|0|
+   ^ pointer here
+#+end_src
+
+Which means:
+- There should be at least one zero cell before the meaningful MBF cells.
+- ~N~ should be a non-zero cell containing the offset required to get to the memory segment in which to alter values while executing code via MBF.
+  - Which means, you can evaluate code at maximum 255 cells away from N for one byte implementations, or more on implementations with bigger cells. That's by design. I'm not changing it.
+- Two zeroed padding cells.
+- ~F~ should initially be set to zero.
+  - This cell, moving across the evaluated code, is referred to as case flag or instruction pointer in the code.
+- ~BF~ is a possibly empty null-terminated sequence of characters to evaluate.
+  - Which means: you can theoretically use MBF to execute code that modifies itself while executing.
+    - What?
+      - Yes. Enjoy.
+
+* MBF versions/files:
+MBF comes in two flavors: right-offsetting and left-offsetting, essentially based on which direction it goes for data sectors:
+- mbfr.bf :: MBF right-offsetting. Offsets ~N~ cells to the right for the values.
+- mbfl.bf :: MBF left-offsetting. Offsets ~N~ cells to the left for the values.
+
+And there are also generated variations that appear after you run ~make all~:
+- mbfr.min.bf :: Auto-generated (from mbfr.bf) file with all the non-BF characters stripped away.
+- mbfl.min.bf :: Auto-generated (from mbfl.bf) file with all the non-BF characters stripped away.
+- repl.bf :: Auto-generated (from mbfr.bf) executable that allows you to evaluate Brainfuck code interactively.
