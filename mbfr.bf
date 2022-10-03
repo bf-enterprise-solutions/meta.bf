@@ -164,7 +164,7 @@
   [[-] ; kill the flag
    ;; restore the value (43 or plus)
    <+++++ +++++ +++++ +++++ +++++
-   +++++ +++++ +++++ ++++
+   +++++ +++++ +++++ +++
    ;; move to the pointed cell
    [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
    >>+ ; increase it
