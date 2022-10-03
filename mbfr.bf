@@ -22,9 +22,9 @@
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++ +++
           [<<+>>-]
-          <[-]>] ; kill the case flag and exit
+          <->] ; kill the case flag and exit
          ;; case closing bracket
-         <[[-] ; kill the flag
+         <[- ; kill the flag
           ;; restore the value (93 or closing bracket)
           < +++ +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
@@ -61,7 +61,7 @@
           <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
          ]>]
         < ; case opening bracket
-        [[-] ; kill the flag
+        [- ; kill the flag
          ;; restore 91 (opening bracket)
          < +   +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++
@@ -85,7 +85,7 @@
          +++++ +++++ +++++ +++++ +++++ +++++ +++
         <<]>]
        < ; case greater than
-       [[-] ; kill the flag
+       [- ; kill the flag
         ;; restore the value (62 or greater than)
         < ++  +++++ +++++ +++++ +++++ +++++ +++++
         +++++ +++++ +++++ +++++ +++++ +++++
@@ -94,7 +94,7 @@
         ;; back to the killed flag
         >>[>]]>]
       < ; case less than
-      [[-] ; kill the flag
+      [- ; kill the flag
        ;; restore the value (60 or less than)
        <+++++ +++++ +++++ +++++ +++++ +++++
        +++++ +++++ +++++ +++++ +++++ +++++
@@ -103,7 +103,7 @@
        ;; back to the killed flag
        >>[>]]>]
      < ; case period
-     [[-] ; kill the flag
+     [- ; kill the flag
       ;; restore the value (46 or period)
       <+++++ +++++ +++++ +++++ +++++
       +++++ +++++ +++++ +++++ +
@@ -125,7 +125,7 @@
       >>[>]  ; back to the case flag (0)
      ]>]
     < ; case minus
-    [[-] ; kill the flag
+    [- ; kill the flag
      ;; restore the value (45 or minus)
      <+++++ +++++ +++++ +++++ +++++
      +++++ +++++ +++++ +++++
@@ -136,7 +136,7 @@
      <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
     ]>]
    < ; case comma
-   [[-] ; kill the flag
+   [- ; kill the flag
     ;; restore the value (44 or comma)
     <+++++ +++++ +++++ +++++ +++++
     +++++ +++++ +++++ ++++
@@ -147,7 +147,7 @@
     <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
    ]>]
   < ; case plus
-  [[-] ; kill the flag
+  [- ; kill the flag
    ;; restore the value (43 or plus)
    <+++++ +++++ +++++ +++++ +++++
    +++++ +++++ +++++ +++
