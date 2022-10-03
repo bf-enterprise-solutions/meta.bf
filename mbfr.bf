@@ -3,7 +3,7 @@
  Simply copy-paste the code below this commentary into your program,
  making sure that the memory looks like this:
 
- [N] [0] [F] [BF code to interpret...] [0]
+ [N] [0] [0] [F] [BF code to interpret...] [0]
   ^ pointer here
 
  - where N is the number of cells to offset starting from N to the
@@ -16,7 +16,7 @@
   char:    ]   [   >   <   .   -   ,   +
 
  Code starts here:]
->>[-] ; move to case flag/instruction pointer and empty it
+>>>[-] ; move to case flag/instruction pointer and empty it
 > ; to the instruction
 ;; interpreter switch/loop
 [<+> ; set case flag
@@ -47,7 +47,7 @@
           > +++ +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
-          [<]<<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
+          [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
           ;; If the cell is not zero then move the instruction pointer
           ;; to the opening bracket
           >> ; value cell
@@ -106,7 +106,7 @@
         ;; add one to N
         [<]<+
         ;; back to the killed flag
-        >>>[>]]>]
+        >>[>]]>]
       < ; case less than
       [[-] ; kill the flag
        ;; restore the value (60 or less than)
@@ -115,7 +115,7 @@
        ;; subtract one from N
        [<]<-
        ;; back to the killed flag
-       >>>[>]]>]
+       >>[>]]>]
      < ; case period
      [[-] ; kill the flag
       ;; restore the value (46 or period)
