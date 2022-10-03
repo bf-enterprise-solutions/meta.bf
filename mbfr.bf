@@ -30,16 +30,19 @@
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
           ;; move to the pointed cell (will appear uncommented further on)
+          ;BEGIN=============================================
           [<]< ; N
           [>>[<<<+>>>-] ; copy the value cell three cells to the left
            <[>+<-] ; copy N copy cell
            <[>+<-] ; copy N
            >>+ ; add to N copy
            <-] ; subtract from N and iterate
+          ;=============================================END
           ;; If the cell is not zero then move the instruction pointer
           ;; to the opening bracket
           >> ; value cell
           [;; move back (will appear uncommented further on)
+           ;BEGIN=============================================
            < ; N copy
            [<[<+>-] ; copy N
             >[<+>-] ; copy N copy
@@ -47,6 +50,7 @@
             >+ ; add to N
             >-] ; subtract from N copy and iterate
            >>[>]  ; back to the case flag (0)
+           ;=============================================END
            < ; move to the last instruction
            ;; Check it for being an opening bracket
            ----- ----- ----- ----- ----- -----
