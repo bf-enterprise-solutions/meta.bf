@@ -44,16 +44,16 @@
          ;; case closing bracket
          <[[-] ; kill the flag
           ;; restore the value (93 or closing bracket)
-          > +++ +++++ +++++ +++++ +++++ +++++ +++++
+          < +++ +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
           [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
           ;; If the cell is not zero then move the instruction pointer
           ;; to the opening bracket
           >> ; value cell
-          [ ; move back to N
-           <<[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
-           >>>[>]< ; move to the last instruction
+          [ ; move back to case flag
+           <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
+           < ; move to the last instruction
            ;; Check it for being an opening bracket
            ----- ----- ----- ----- ----- -----
            ----- ----- ----- ----- ----- -----
@@ -64,24 +64,28 @@
             +++++ +++++ +++++ +++++ +++++ +++++ +
             [>>+<<-] ; copy it to the sector for further evaluation
             ;; subtract 91 from the next value
-            < - ----- ----- ----- ----- ----- -----
+            < -   ----- ----- ----- ----- -----
             ----- ----- ----- ----- ----- -----
-            ----- ----- ----- ----- ----- -----] ; until opening bracket
+            ----- ----- ----- ----- ----- ----- -----] ; until opening bracket
            ;; restore the bracket in place once hit
            +++++ +++++ +++++ +++++ +++++ +++++
            +++++ +++++ +++++ +++++ +++++ +++++
            +++++ +++++ +++++ +++++ +++++ +++++ +
            ;; move to the value cell
            [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
-           >>[<+>-]] ; backup the value cell to N copy and exit
-          <[>+<-]> ; copy the value if it was backed up
+           >>[<<+>>-]] ; backup the value cell to N and exit
+          <<[>>+<<-]>> ; copy the value if it was backed up
           ;; move back
           <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
          ]>]
         < ; case opening bracket
         [[-] ; kill the flag
+         ;; restore 91 (opening bracket)
+         < +   +++++ +++++ +++++ +++++ +++++
+         +++++ +++++ +++++ +++++ +++++ +++++
+         +++++ +++++ +++++ +++++ +++++ +++++ +++++
          ;; Check next instruction for being a closing bracket
-         > --- ----- ----- ----- ----- -----
+         >>--- ----- ----- ----- ----- -----
          ----- ----- ----- ----- ----- -----
          ----- ----- ----- ----- ----- ----- -----
          [; restore the value if it is not
@@ -97,7 +101,7 @@
          +++++ +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++ +++
-        ]>]
+        <<]>]
        < ; case greater than
        [[-] ; kill the flag
         ;; restore the value (62 or greater than)
