@@ -39,35 +39,35 @@
           ;; If the cell is not zero then move the instruction pointer
           ;; to the opening bracket
           >> ; value cell
-           [;; move back (will appear uncommented further on)
-            < ; N copy
-            [<[<+>-] ; copy N
-             >[<+>-] ; copy N copy
-             <<<[>>>+<<<-] ; copy the value cell three cells to the right
-             >+ ; add to N
-             >-] ; subtract from N copy and iterate
-            >>[>]  ; back to the case flag (0)
-            < ; move to the last instruction
-            ;; Check it for being an opening bracket
-            ----- ----- ----- ----- ----- -----
-            ----- ----- ----- ----- ----- -----
-            ----- ----- ----- ----- ----- ----- -
-            [; restore the value if it is not
-             +++++ +++++ +++++ +++++ +++++ +++++
-             +++++ +++++ +++++ +++++ +++++ +++++
-             +++++ +++++ +++++ +++++ +++++ +++++ +
-             [>>+<<-] ; copy it to the sector for further evaluation
-             ;; subtract 91 from the next value
-             < -   ----- ----- ----- ----- -----
-             ----- ----- ----- ----- ----- -----
-             ----- ----- ----- ----- ----- ----- -----] ; until opening bracket
-            ;; restore the bracket in place once hit
+          [;; move back (will appear uncommented further on)
+           < ; N copy
+           [<[<+>-] ; copy N
+            >[<+>-] ; copy N copy
+            <<<[>>>+<<<-] ; copy the value cell three cells to the right
+            >+ ; add to N
+            >-] ; subtract from N copy and iterate
+           >>[>]  ; back to the case flag (0)
+           < ; move to the last instruction
+           ;; Check it for being an opening bracket
+           ----- ----- ----- ----- ----- -----
+           ----- ----- ----- ----- ----- -----
+           ----- ----- ----- ----- ----- ----- -
+           [; restore the value if it is not
             +++++ +++++ +++++ +++++ +++++ +++++
             +++++ +++++ +++++ +++++ +++++ +++++
             +++++ +++++ +++++ +++++ +++++ +++++ +
-            ;; move to the value cell
-            [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
-            >>[<<+>>-]] ; backup the value cell to N and exit
+            [>>+<<-] ; copy it to the sector for further evaluation
+            ;; subtract 91 from the next value
+            < -   ----- ----- ----- ----- -----
+            ----- ----- ----- ----- ----- -----
+            ----- ----- ----- ----- ----- ----- -----] ; until opening bracket
+           ;; restore the bracket in place once hit
+           +++++ +++++ +++++ +++++ +++++ +++++
+           +++++ +++++ +++++ +++++ +++++ +++++
+           +++++ +++++ +++++ +++++ +++++ +++++ +
+           ;; move to the value cell
+           [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
+           >>[<<+>>-]] ; backup the value cell to N and exit
           <<[>>+<<-]>> ; copy the value if it was backed up
           ;; move back
           <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
@@ -95,7 +95,7 @@
          +++++ +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++ +++
-        <<]>]
+         <<]>]
        < ; case greater than
        [- ; kill the flag
         ;; restore the value (62 or greater than)
