@@ -30,6 +30,8 @@ Which means:
     - What?
       - Yes. Enjoy.
 
+Once you've put your data the way MBF requires, you can simply copy-paste the code of MBF version you need into your program and run it on your data. After MBF is done, the pointer stays at N and the code to interpret stays the way it was before evaluation, so you don't need to back anything up!
+
 * MBF versions/files:
 MBF comes in two flavors: right-offsetting and left-offsetting, essentially based on which direction it goes for data sectors:
 - mbfr.bf :: MBF right-offsetting. Offsets ~N~ cells to the right for the values.
