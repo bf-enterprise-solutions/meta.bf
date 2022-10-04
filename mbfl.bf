@@ -1,3 +1,5 @@
+>>>[-] ; move to case flag/instruction pointer and empty it
+> ; to the instruction
 ;; interpreter switch/loop
 [<+> ; set case flag
  [; plus
