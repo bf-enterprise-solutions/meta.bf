@@ -1,5 +1,5 @@
 >>>[-] ; move to case flag/instruction pointer and empty it
-> ; to the instruction
+> ; to the instructions
 ;; interpreter switch/loop
 [<+> ; set case flag
  [; plus
