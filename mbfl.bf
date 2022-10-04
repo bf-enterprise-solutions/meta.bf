@@ -1,10 +1,13 @@
 >>>[-] ; move to case flag/instruction pointer and empty it
 > ; to the instructions
+;; shorten the instructions for ease of evaluation
+[----- ----- ----- -----
+ ----- ----- ----- ----->]
+<[<]> ; to the instructions again
 ;; interpreter switch/loop
 [<+> ; set case flag
  [; plus
-  ----- ----- ----- -----
-  ----- ----- ----- ----- ---
+  ---
   [- ; comma
    [- ; minus
     [- ; period
@@ -18,16 +21,14 @@
         [-- ; closing bracket
          [; default case
           ;; restore and move the original value
-          +++++ +++++ +++++ +++++ +++++ +++++
-          +++++ +++++ +++++ +++++ +++++ +++++
-          +++++ +++++ +++++ +++++ +++++ +++++ +++
+          +++++ +++++ +++++ +++++ +++++
+          +++++ +++++ +++++ +++++ +++++ +++
           [<<+>>-]
           <->] ; kill the case flag and exit
          ;; case closing bracket
          <[- ; kill the flag
-          ;; restore the value (93 or closing bracket)
-          < +++ +++++ +++++ +++++ +++++ +++++ +++++
-          +++++ +++++ +++++ +++++ +++++ +++++
+          ;; restore the value (53 or closing bracket)
+          < +++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
           ;; move to the pointed cell (will appear uncommented further on)
           ;BEGIN=============================================
@@ -53,22 +54,18 @@
            ;=============================================END
            < ; move to the last instruction
            ;; Check it for being an opening bracket
-           ----- ----- ----- ----- ----- -----
-           ----- ----- ----- ----- ----- -----
-           ----- ----- ----- ----- ----- ----- -
+           ----- ----- ----- ----- -----
+           ----- ----- ----- ----- ----- -
            [; restore the value if it is not
-            +++++ +++++ +++++ +++++ +++++ +++++
-            +++++ +++++ +++++ +++++ +++++ +++++
-            +++++ +++++ +++++ +++++ +++++ +++++ +
+            +++++ +++++ +++++ +++++ +++++
+            +++++ +++++ +++++ +++++ +++++ +
             [>>+<<-] ; copy it to the sector for further evaluation
-            ;; subtract 91 from the next value
-            < -   ----- ----- ----- ----- -----
-            ----- ----- ----- ----- ----- -----
-            ----- ----- ----- ----- ----- ----- -----] ; until opening bracket
+            ;; subtract 51 from the next value
+            < -   ----- ----- ----- -----
+            ----- ----- ----- ----- ----- -----] ; until opening bracket
            ;; restore the bracket in place once hit
-           +++++ +++++ +++++ +++++ +++++ +++++
-           +++++ +++++ +++++ +++++ +++++ +++++
-           +++++ +++++ +++++ +++++ +++++ +++++ +
+           +++++ +++++ +++++ +++++ +++++
+           +++++ +++++ +++++ +++++ +++++ +
            ;; move to the value cell
            [<]<[<<[>>>+<<<-]>[<+>-]>[<+>-]<<+>-]
            <<[>>+<<-]] ; backup the value cell to N and exit
@@ -78,51 +75,43 @@
          ]>]
         < ; case opening bracket
         [- ; kill the flag
-         ;; restore 91 (opening bracket)
-         < +   +++++ +++++ +++++ +++++ +++++
+         ;; restore 51 (opening bracket)
+         < +   +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++
-         +++++ +++++ +++++ +++++ +++++ +++++ +++++
          ;; Check next instruction for being a closing bracket
-         >>--- ----- ----- ----- ----- -----
+         >>--- ----- ----- ----- -----
          ----- ----- ----- ----- ----- -----
-         ----- ----- ----- ----- ----- ----- -----
          [; restore the value if it is not
-          +++++ +++++ +++++ +++++ +++++ +++++
-          +++++ +++++ +++++ +++++ +++++ +++++
-          +++++ +++++ +++++ +++++ +++++ +++++ +++
+          +++++ +++++ +++++ +++++ +++++
+          +++++ +++++ +++++ +++++ +++++ +++
           [<<+>>-] ; copy it to the processed sector
-          ;; subtract 93 from the next value
-          > --- ----- ----- ----- ----- -----
-          ----- ----- ----- ----- ----- -----
-          ----- ----- ----- ----- ----- ----- -----]
+          ;; subtract 53 from the next value
+          > --- ----- ----- ----- -----
+          ----- ----- ----- ----- ----- -----]
          ; restore the closing bracket in place to be processed next
-         +++++ +++++ +++++ +++++ +++++ +++++
-         +++++ +++++ +++++ +++++ +++++ +++++
-         +++++ +++++ +++++ +++++ +++++ +++++ +++
+         +++++ +++++ +++++ +++++ +++++
+         +++++ +++++ +++++ +++++ +++++ +++
          <<]>]
        < ; case greater than
        [- ; kill the flag
-        ;; restore the value (62 or greater than)
-        < ++  +++++ +++++ +++++ +++++ +++++ +++++
-        +++++ +++++ +++++ +++++ +++++ +++++
+        ;; restore the value (22 or greater than)
+        < ++ +++++ +++++ +++++ +++++
         ;; add one to N
         [<]<+
         ;; back to the killed flag
         >>[>]]>]
       < ; case less than
       [- ; kill the flag
-       ;; restore the value (60 or less than)
-       <+++++ +++++ +++++ +++++ +++++ +++++
-       +++++ +++++ +++++ +++++ +++++ +++++
+       ;; restore the value (20 or less than)
+       < +++++ +++++ +++++ +++++
        ;; subtract one from N
        [<]<-
        ;; back to the killed flag
        >>[>]]>]
      < ; case period
      [- ; kill the flag
-      ;; restore the value (46 or period)
-      <+++++ +++++ +++++ +++++ +++++
-      +++++ +++++ +++++ +++++ +
+      ;; restore the value (6 or period)
+      < +++++ +
       ;; move to the pointed cell
       [<]<[<<[>>>+<<<-]>[<+>-]>[<+>-]<<+>-]
       <<. ; print the value cell
@@ -131,9 +120,8 @@
      ]>]
     < ; case minus
     [- ; kill the flag
-     ;; restore the value (45 or minus)
-     <+++++ +++++ +++++ +++++ +++++
-     +++++ +++++ +++++ +++++
+     ;; restore the value (5 or minus)
+     < +++++
      ;; move to the pointed cell
      [<]<[<<[>>>+<<<-]>[<+>-]>[<+>-]<<+>-]
      <<- ; decrease it
@@ -142,9 +130,8 @@
     ]>]
    < ; case comma
    [- ; kill the flag
-    ;; restore the value (44 or comma)
-    <+++++ +++++ +++++ +++++ +++++
-    +++++ +++++ +++++ ++++
+    ;; restore the value (4 or comma)
+    < ++++
     ;; move to the pointed cell
     [<]<[<<[>>>+<<<-]>[<+>-]>[<+>-]<<+>-]
     <<, ; read to it
@@ -153,9 +140,8 @@
    ]>]
   < ; case plus
   [- ; kill the flag
-   ;; restore the value (43 or plus)
-   <+++++ +++++ +++++ +++++ +++++
-   +++++ +++++ +++++ +++
+   ;; restore the value (3 or plus)
+   < +++
    ;; move to the pointed cell
    [<]<[<<[>>>+<<<-]>[<+>-]>[<+>-]<<+>-]
    <<+ ; increase it
@@ -163,6 +149,6 @@
    >[>[>+<-]<[>+<-]>>>[<<<+>>>-]<+<-]>>>[>]
   ]>]
  >] ; next instruction
-; move instructions to where they've been initially
-<[[>+<-]<]
+; restore and move instructions to where they've been initially
+<[+++++ +++++ +++++ +++++ +++++ +++++ +++++ +++++[>+<-]<]
 << ; N
