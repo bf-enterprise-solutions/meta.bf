@@ -7,7 +7,7 @@ MBF follows [[https://github.com/maksimKorzh/dbfi][Daniel Christofani's DBFI]] i
 
 With these properties, you can embed MBF into your BF program and enable it to read and execute arbitrary BF code with the same privileges as the code of the program itself and in the same memory cells.
 
-MBF is already used as-is in [[https://github.com/aartaka/bfed][BFED]], Brainfuck-based UNIX ed re-implementation (by yours truly), and is likely to be used for scripting in the upcoming Brainfuck-based operating system (follow me to get notified of when I complete and publish that).
+MBF is intended to be used in [[https://github.com/aartaka/bfed][BFED]], Brainfuck-based UNIX ed re-implementation (by yours truly), and it is likely to be used for scripting in the upcoming Brainfuck-based operating system (follow me to get notified of when I complete and publish that).
 
 * How MBF works
 
