@@ -40,5 +40,7 @@ MBF comes in two flavors: right-offsetting and left-offsetting, essentially base
 And there are also auto-generated files that appear after you run ~chmod 774 make.lisp; ./make.lisp~ (implies you have SBCL Common Lisp compiler installed):
 - mbfr.min.bf :: Auto-generated (from mbfr.bf) file with all the non-BF characters stripped away.
 - mbfl.min.bf :: Auto-generated (from mbfl.bf) file with all the non-BF characters stripped away.
+- oneshot.bf :: Auto-generated (from mbfr.bf) executable that allows you to evaluate one piece of BF code and exit.
+- oneshot.min.bf :: Auto-generated minified oneshot.bf code.
 - repl.bf :: Auto-generated (from mbfr.bf) executable that allows you to evaluate Brainfuck code interactively.
-- repl.min.bf :: Auto-generated (from repl.bf) minified REPL code. Absolutely the same as repl.bf except for all non-BF characters stripped away.
+- repl.min.bf :: Auto-generated (from repl.bf) minified REPL code.
