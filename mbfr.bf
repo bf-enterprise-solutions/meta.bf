@@ -163,6 +163,6 @@
    <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
   ]>]
  >] ; next instruction
-; restore and move instructions to where they've been initially
-<[+++++ +++++ +++++ +++++ +++++ +++++ +++++ +++++[>+<-]<]
+; move instructions to where they've been initially
+<<[[>+<-]<]
 <<< ; N
