@@ -6,23 +6,23 @@
   "Characters to preserve in minified files.
 Basically, Brainfuck commands you use.")
 
-(with-open-file (min-file #p"mbfr.min.bf"
+(with-open-file (min-file #p"meta.r.min.bf"
                           :direction :output
                           :if-exists :supersede
                           :if-does-not-exist :create)
-  (loop for char across (uiop:read-file-string #p"mbfr.bf")
+  (loop for char across (uiop:read-file-string #p"meta.r.bf")
         when (find char commands)
           do (write-char char min-file)))
 
-(with-open-file (min-file #p"mbfl.min.bf"
+(with-open-file (min-file #p"meta.l.min.bf"
                           :direction :output
                           :if-exists :supersede
                           :if-does-not-exist :create)
-  (loop for char across (uiop:read-file-string #p"mbfl.bf")
+  (loop for char across (uiop:read-file-string #p"meta.l.bf")
         when (find char commands)
           do (write-char char min-file)))
 
-(with-open-file (oneshot-file #p"oneshot.bf"
+(with-open-file (oneshot-file #p"meta.oneshot.bf"
                               :direction :output
                               :if-exists :supersede
                               :if-does-not-exist :create)
@@ -31,17 +31,17 @@ Basically, Brainfuck commands you use.")
 ,----- ----- [>,----------] ; read until a newline
 <[+++++ +++++<] ; restore the values
 <<< ; N" oneshot-file)
-  (write-string (uiop:read-file-string #p"mbfr.bf") oneshot-file))
+  (write-string (uiop:read-file-string #p"meta.r.bf") oneshot-file))
 
-(with-open-file (min-file #p"oneshot.min.bf"
+(with-open-file (min-file #p"meta.oneshot.min.bf"
                           :direction :output
                           :if-exists :supersede
                           :if-does-not-exist :create)
-  (loop for char across (uiop:read-file-string #p"oneshot.bf")
+  (loop for char across (uiop:read-file-string #p"meta.oneshot.bf")
         when (find char commands)
           do (write-char char min-file)))
 
-(with-open-file (repl-file #p"repl.bf"
+(with-open-file (repl-file #p"meta.repl.bf"
                            :direction :output
                            :if-exists :supersede
                            :if-does-not-exist :create)
@@ -52,16 +52,16 @@ Basically, Brainfuck commands you use.")
 >; move to instruction
 [<<<< ; N
  " repl-file)
-  (write-string (uiop:read-file-string #p"mbfr.bf") repl-file)
+  (write-string (uiop:read-file-string #p"meta.r.bf") repl-file)
   (write-string "
  >>>>[>]<[[-]<]> ; Clear the previous input
  ,----- ----- [>,----- -----] <[+++++ +++++<]> ; read a new one
 ]" repl-file))
 
-(with-open-file (min-file #p"repl.min.bf"
+(with-open-file (min-file #p"meta.repl.min.bf"
                           :direction :output
                           :if-exists :supersede
                           :if-does-not-exist :create)
-  (loop for char across (uiop:read-file-string #p"repl.bf")
+  (loop for char across (uiop:read-file-string #p"meta.repl.bf")
         when (find char commands)
           do (write-char char min-file)))
