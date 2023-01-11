@@ -1,13 +1,15 @@
 .PHONY: all min clean
 
-min-files = meta.r.min.bf meta.l.min.bf meta.oneshot.min.bf meta.repl.min.bf
-
+min-files = meta.r.min.bf meta.l.min.bf meta.oneshot.r.min.bf meta.oneshot.l.min.bf meta.repl.r.min.bf meta.repl.l.min.bf
 min: $(min-files)
 
-all: meta.oneshot.bf meta.repl.bf min
+derivative-files = meta.oneshot.r.bf meta.oneshot.l.bf meta.repl.r.bf meta.repl.l.bf
+deriv: $(derivative-files)
+
+all: deriv min
 
 clean:
-	rm meta.oneshot.bf meta.repl.bf $(min-files)
+	rm $(derivative-files) $(min-files)
 
 %.bf: %.in
 	m4 meta.m4 $^ >> $@

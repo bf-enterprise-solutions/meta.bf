@@ -1,0 +1,10 @@
+>>>----- ; set N to 254
+>>>> ; instructions
+,----- ----- [>,----------] ; read until a newline
+<[+++++ +++++<] ; restore the values
+>; move to instruction
+[<<<< ; N
+include(meta.l.bf)
+>>>>[>]<[[-]<]> ; Clear the previous input
+ ,----- ----- [>,----- -----] <[+++++ +++++<]> ; read a new one
+]
