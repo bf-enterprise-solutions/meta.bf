@@ -29,28 +29,11 @@
           < +++ +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++
-          ;; move to the pointed cell (will appear uncommented further on)
-          ;BEGIN=============================================
-          [<]< ; N
-          [>>[<<<+>>>-] ; copy the value cell three cells to the left
-           <[>+<-] ; copy N copy cell
-           <[>+<-] ; copy N
-           >>+ ; add to N copy
-           <-] ; subtract from N and iterate
-          ;=============================================END
+          tovaluecell()
           ;; If the cell is not zero then move the instruction pointer
           ;; to the opening bracket
-          >> ; value cell
-          [;; move back (will appear uncommented further on)
-           ;BEGIN=============================================
-           < ; N copy
-           [<[<+>-] ; copy N
-            >[<+>-] ; copy N copy
-            <<<[>>>+<<<-] ; copy the value cell three cells to the right
-            >+ ; add to N
-            >-] ; subtract from N copy and iterate
-           >>[>]  ; back to the case flag (0)
-           ;=============================================END
+          tovalue() ; value cell
+          [fromvaluecell()
            < ; move to the last instruction
            ;; Check it for being an opening bracket
            ----- ----- ----- ----- ----- -----
@@ -70,11 +53,10 @@
            +++++ +++++ +++++ +++++ +++++ +++++
            +++++ +++++ +++++ +++++ +++++ +++++ +
            ;; move to the value cell
-           [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
-           >>[<<+>>-]] ; backup the value cell to N and exit
-          <<[>>+<<-]>> ; copy the value if it was backed up
-          ;; move back
-          <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
+           tovaluecell()
+           tovalue()[fromvalue()+tovalue()-]] ; backup the value cell to N and exit
+          fromvalue()[tovalue()+fromvalue()-]tovalue() ; copy the value if it was backed up
+          fromvaluecell()
          ]>]
         < ; case opening bracket
         [- ; kill the flag
@@ -124,22 +106,18 @@
       ;; restore the value (46 or period)
       <+++++ +++++ +++++ +++++ +++++
       +++++ +++++ +++++ +++++ +
-      ;; move to the pointed cell
-      [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
-      >>. ; print the value cell
-      ;; move back
-      <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
+      tovaluecell()
+      tovalue(). ; print the value cell
+      fromvaluecell()
      ]>]
     < ; case minus
     [- ; kill the flag
      ;; restore the value (45 or minus)
      <+++++ +++++ +++++ +++++ +++++
      +++++ +++++ +++++ +++++
-     ;; move to the pointed cell
-     [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
-     >>- ; decrease it
-     ;; move back
-     <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
+     tovaluecell()
+     tovalue()- ; decrease it
+     fromvaluecell()
     ]>]
    < ; case comma
    [- ; kill the flag
@@ -147,21 +125,18 @@
     <+++++ +++++ +++++ +++++ +++++
     +++++ +++++ +++++ ++++
     ;; move to the pointed cell
-    [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
-    >>, ; read to it
-    ;; move back
-    <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
+    tovaluecell()
+    tovalue(), ; read to it
+    fromvaluecell()
    ]>]
   < ; case plus
   [- ; kill the flag
    ;; restore the value (43 or plus)
    <+++++ +++++ +++++ +++++ +++++
    +++++ +++++ +++++ +++
-   ;; move to the pointed cell
-   [<]<[>>[<<<+>>>-]<[>+<-]<[>+<-]>>+<-]
-   >>+ ; increase it
-   ;; move back
-   <[<[<+>-]>[<+>-]<<<[>>>+<<<-]>+>-]>>[>]
+   tovaluecell()
+   tovalue()+ ; increase it
+   fromvaluecell()
   ]>]
  >] ; next instruction
 ; move instructions to where they've been initially
