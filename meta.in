@@ -1,130 +1,130 @@
->>>[-] ; move to case flag/instruction pointer and empty it
-> ; to the instructions
-[>]< ; to the last instruction
-[; Compact all cells by 31 (the biggest unused special ASCII char)
+>>>[-] move to case flag/instruction pointer and empty it
+> to the instructions
+[>]< to the last instruction
+[ compact all cells by 31 (the biggest unused special ASCII char)
  ----- ----- ----- -----
  ----- ----- - <]
-> ; back to instuctions
-;; interpreter switch/loop
-[<+> ; set case flag
- [; plus (43 minus 31)
+> back to instuctions
+interpreter switch/loop
+[<+> set case flag
+ [plus (43 minus 31)
   ----- ----- --
-  [- ; comma (44 minus 31)
-   [- ; minus (45 minus 31)
-    [- ; period (46 minus 31)
-     [; less than (60 minus 31)
+  [- comma (44 minus 31)
+   [- minus (45 minus 31)
+    [- period (46 minus 31)
+     [less than (60 minus 31)
       ----- ----- ----
-      [-- ; greater than (62 minus 31)
-       [; opening bracket (91 minus 31)
+      [-- greater than (62 minus 31)
+       [opening bracket (91 minus 31)
         ----- -----
         ----- -----
         ----- ----
-        [-- ; closing bracket (93 minus 31)
-         [; default case
-          ;; restore and move the original value (93 minus 31)
+        [-- closing bracket (93 minus 31)
+         [ default case
+          restore and move the original value (93 minus 31)
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++ ++
           [<<+>>-]
-          <->] ; kill the case flag and exit
-         ;; case closing bracket
-         <[- ; kill the flag
-          ;; restore the value (93 minus 31 or closing bracket)
+          <->] kill the case flag and exit
+         case closing bracket
+         <[- kill the flag
+          restore the value (93 minus 31 or closing bracket)
           <  ++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++ +++++
           tovaluecell()
-          ;; If the cell is not zero then move the instruction pointer
-          ;; to the opening bracket
-          tovalue() ; value cell
+          if the cell is not zero then move the instruction pointer
+          to the opening bracket
+          tovalue() value cell
           [fromvaluecell()
-           < ; move to the last instruction
-           ;; Check it for being an opening bracket
+           < move to the last instruction
+           check it for being an opening bracket
            ----- ----- ----- ----- ----- -----
            ----- ----- ----- ----- ----- -----
-           [; restore the value if it is not
+           [ restore the value if it is not
             +++++ +++++ +++++ +++++ +++++ +++++
             +++++ +++++ +++++ +++++ +++++ +++++
-            [>>+<<-] ; copy it to the sector for further evaluation
-            ;; subtract 91 from the next value
+            [>>+<<-] copy it to the sector for further evaluation
+            subtract 91 from the next value
             <     ----- ----- ----- ----- -----
-            ----- ----- ----- ----- ----- ----- -----] ; until opening bracket
-           ;; restore the bracket in place once hit
+            ----- ----- ----- ----- ----- ----- -----] until opening bracket
+           restore the bracket in place once hit
            +++++ +++++ +++++ +++++ +++++ +++++
            +++++ +++++ +++++ +++++ +++++ +++++
-           ;; move to the value cell
+           move to the value cell
            tovaluecell()
-           tovalue()[fromvalue()+tovalue()-]] ; backup the value cell to N and exit
-          fromvalue()[tovalue()+fromvalue()-]tovalue() ; copy the value if it was backed up
+           tovalue()[fromvalue()+tovalue()-]] backup the value cell to N and exit
+          fromvalue()[tovalue()+fromvalue()-]tovalue() copy the value if it was backed up
           fromvaluecell()
          ]>]
-        < ; case opening bracket
-        [- ; kill the flag
-         ;; restore 91 (opening bracket)
+        < case opening bracket
+        [- kill the flag
+         restore 91 (opening bracket)
          <     +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++ +++++
-         ;; Check next instruction for being a closing bracket
+         check next instruction for being a closing bracket
          >>>-- ----- ----- ----- ----- -----
          ----- ----- ----- ----- ----- ----- -----
-         [; restore the value if it is not
+         [restore the value if it is not
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++ ++
-          [<<+>>-] ; copy it to the processed sector
-          ;; subtract closing bracket (93 minus 31) from the next value
+          [<<+>>-] copy it to the processed sector
+          subtract closing bracket (93 minus 31) from the next value
           >  -- ----- ----- ----- ----- -----
           ----- ----- ----- ----- ----- ----- -----]
-         ; restore the closing bracket in place to be processed next
+         restore the closing bracket in place to be processed next
          +++++ +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++ ++
          <<]>]
-       < ; case greater than
-       [- ; kill the flag
-        ;; restore the value (62 minus 31 or greater than)
+       < case greater than
+       [- kill the flag
+        restore the value (62 minus 31 or greater than)
         < + +++++ +++++ +++++ +++++ +++++ +++++
-        ;; add/subtract one to N
+        add/subtract one to N
         [<]<right()
-        ;; back to the killed flag
+        back to the killed flag
         >>[>]]>]
-      < ; case less than
-      [- ; kill the flag
-       ;; restore the value (60 minus 31 or less than)
+      < case less than
+      [- kill the flag
+       restore the value (60 minus 31 or less than)
        <++++ +++++ +++++ +++++ +++++ +++++
-       ;; subtract/add one to N
+       subtract/add one to N
        [<]<left()
-       ;; back to the killed flag
+       back to the killed flag
        >>[>]]>]
-     < ; case period
-     [- ; kill the flag
-      ;; restore the value (46 minus 31 or period)
+     < case period
+     [- kill the flag
+      restore the value (46 minus 31 or period)
       < +++++ +++++ +++++
       tovaluecell()
-      tovalue(). ; print the value cell
+      tovalue(). print the value cell
       fromvaluecell()
      ]>]
-    < ; case minus
-    [- ; kill the flag
-     ;; restore the value (45 minus 21 or minus)
+    < case minus
+    [- kill the flag
+     restore the value (45 minus 21 or minus)
      <++++ +++++ +++++
      tovaluecell()
-     tovalue()- ; decrease it
+     tovalue()- decrease it
      fromvaluecell()
     ]>]
-   < ; case comma
-   [- ; kill the flag
-    ;; restore the value (44 minus 31 or comma)
+   < case comma
+   [- kill the flag
+    restore the value (44 minus 31 or comma)
     <+++++ +++++ +++
-    ;; move to the pointed cell
+    move to the pointed cell
     tovaluecell()
-    tovalue(), ; read to it
+    tovalue(), read to it
     fromvaluecell()
    ]>]
-  < ; case plus
-  [- ; kill the flag
-   ;; restore the value (43 minus 31 or plus)
+  < case plus
+  [- kill the flag
+   restore the value (43 minus 31 or plus)
    <+++++ +++++ ++
    tovaluecell()
-   tovalue()+ ; increase it
+   tovalue()+ increase it
    fromvaluecell()
   ]>]
- >] ; next instruction
-; move instructions to where they've been initially and add 31 back
+ >] next instruction
+move instructions to where they've been initially and add 31 back
 <<<[+++++ +++++ +++++ +++++ +++++ +++++ + [>>+<<-]<]
-< ; N
+< N
