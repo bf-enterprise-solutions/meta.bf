@@ -79,16 +79,16 @@
        [- ; kill the flag
         ;; restore the value (62 minus 31 or greater than)
         < + +++++ +++++ +++++ +++++ +++++ +++++
-        ;; add one to N
-        [<]<+
+        ;; add/subtract one to N
+        [<]<right()
         ;; back to the killed flag
         >>[>]]>]
       < ; case less than
       [- ; kill the flag
        ;; restore the value (60 minus 31 or less than)
        <++++ +++++ +++++ +++++ +++++ +++++
-       ;; subtract one from N
-       [<]<-
+       ;; subtract/add one to N
+       [<]<left()
        ;; back to the killed flag
        >>[>]]>]
      < ; case period
