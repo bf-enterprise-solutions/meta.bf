@@ -24,7 +24,19 @@
  (https://github.com/bf-enterprise-solutions/os.bf), a full-fledged
  Brainfuck OS.
 
- [1 HOW META.BF WORKS
+ [1 GETTING STARTED
+
+  Clone the code:
+  [shell:
+   git clone https://github.com/bf-enterprise-solutions/meta.bf.git]
+  And build str.bf:
+  [shell:
+   make all]
+
+  Copy-paste it into your code and see the endless metacircularity of
+  code fractals unfold before your very eyes!]
+
+ [2 HOW META.BF WORKS
 
   As for any sufficiently complex copy-paste-able Brainfuck program,
   meta.bf requires a certain memory layout for the values it uses. The
@@ -59,7 +71,7 @@
   the code to interpret stays the way it was before evaluation, so you
   don't need to back anything up!]
 
- [2 META.BF VERSIONS/FILES:
+ [3 META.BF VERSIONS/FILES:
 
   meta.bf comes in two flavors: right-offsetting and left-offsetting,
   essentially based on which direction it goes for data sectors:
