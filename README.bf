@@ -94,4 +94,9 @@
   and meta.l.bf) script that allows you to evaluate Brainfuck code
   interactively.
   - meta.repl.r.min.bf and meta.repl.l.min.bf: Auto-generated (from
-  meta.repl.*.bf) minified REPL code.]]
+  meta.repl.*.bf) minified REPL code.]
+
+ [4 TO DO:
+  - Make it support nested loops.
+  - Optimize layout and memory even more. Or revert all the
+  optimizations for the sake of readability.]]
