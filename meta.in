@@ -1,4 +1,4 @@
->>>[-] move to case flag/instruction pointer and empty it
+>>>>[-] move to case flag/instruction pointer and empty it
 > to the instructions
 [>]< to the last instruction
 [ compact all cells by 31 (the biggest unused special ASCII char)
@@ -24,12 +24,12 @@ interpreter switch/loop
           restore and move the original value (93 minus 31)
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++ ++
-          [<<+>>-]
+          [<<<+>>>-]
           <->] kill the case flag and exit
          case closing bracket
          <[- kill the flag
           restore the value (93 minus 31 or closing bracket)
-          <  ++ +++++ +++++ +++++ +++++ +++++
+          << ++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++ +++++
           tovaluecell()
           if the cell is not zero then move the instruction pointer
@@ -43,7 +43,7 @@ interpreter switch/loop
            [ restore the value if it is not
             +++++ +++++ +++++ +++++ +++++ +++++
             +++++ +++++ +++++ +++++ +++++ +++++
-            [>>+<<-] copy it to the sector for further evaluation
+            [>>>+<<<-] copy it to the sector for further evaluation
             subtract 91 from the next value
             <     ----- ----- ----- ----- -----
             ----- ----- ----- ----- ----- ----- -----] until opening bracket
@@ -59,15 +59,15 @@ interpreter switch/loop
         < case opening bracket
         [- kill the flag
          restore 91 (opening bracket)
-         <     +++++ +++++ +++++ +++++ +++++
+         <<    +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++ +++++
          check next instruction for being a closing bracket
-         >>>-- ----- ----- ----- ----- -----
+         >>>>  ----- ----- ----- ----- ----- --
          ----- ----- ----- ----- ----- ----- -----
          [restore the value if it is not
           +++++ +++++ +++++ +++++ +++++ +++++
           +++++ +++++ +++++ +++++ +++++ +++++ ++
-          [<<+>>-] copy it to the processed sector
+          [<<<+>>>-] copy it to the processed sector
           subtract closing bracket (93 minus 31) from the next value
           >  -- ----- ----- ----- ----- -----
           ----- ----- ----- ----- ----- ----- -----]
@@ -78,23 +78,25 @@ interpreter switch/loop
        < case greater than
        [- kill the flag
         restore the value (62 minus 31 or greater than)
-        < + +++++ +++++ +++++ +++++ +++++ +++++
+        << + +++++ +++++ +++++ +++++ +++++ +++++
         add/subtract one to N
         [<]<right()
         back to the killed flag
-        >>[>]]>]
+        >>[>]>
+       ]>]
       < case less than
       [- kill the flag
        restore the value (60 minus 31 or less than)
-       <++++ +++++ +++++ +++++ +++++ +++++
+       <<++++ +++++ +++++ +++++ +++++ +++++
        subtract/add one to N
        [<]<left()
        back to the killed flag
-       >>[>]]>]
+       >>[>]>
+      ]>]
      < case period
      [- kill the flag
       restore the value (46 minus 31 or period)
-      < +++++ +++++ +++++
+      << +++++ +++++ +++++
       tovaluecell()
       tovalue(). print the value cell
       fromvaluecell()
@@ -102,7 +104,7 @@ interpreter switch/loop
     < case minus
     [- kill the flag
      restore the value (45 minus 21 or minus)
-     <++++ +++++ +++++
+     <<++++ +++++ +++++
      tovaluecell()
      tovalue()- decrease it
      fromvaluecell()
@@ -110,7 +112,7 @@ interpreter switch/loop
    < case comma
    [- kill the flag
     restore the value (44 minus 31 or comma)
-    <+++++ +++++ +++
+    <<+++++ +++++ +++
     move to the pointed cell
     tovaluecell()
     tovalue(), read to it
@@ -119,7 +121,7 @@ interpreter switch/loop
   < case plus
   [- kill the flag
    restore the value (43 minus 31 or plus)
-   <+++++ +++++ ++
+   <<+++++ +++++ ++
    tovaluecell()
    tovalue()+ increase it
    fromvaluecell()

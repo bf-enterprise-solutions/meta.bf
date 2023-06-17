@@ -42,7 +42,7 @@
   meta.bf requires a certain memory layout for the values it uses. The
   layout is:
 
-  [0] [^N] [0] [0] [F] [BF...] [0]
+  [0] [^N] [0] [0] [0] [F] [BF...] [0]
 
   Which means:
 
@@ -55,9 +55,9 @@
   N for one byte implementations, or more on implementations with
   bigger cells. That's by design. I'm not changing it.
 
-  - Two zeroed padding cells.
+  - Three zeroed padding cells.
   - F should initially be set to zero.
-  - This cell, moving across the evaluated code, is referred to as
+  -- This cell, moving across the evaluated code, is referred to as
   case flag or instruction pointer in the code.
   - BF is a possibly empty null-terminated sequence of characters to evaluate.
   - Which means: you can theoretically use meta.bf to execute code
