@@ -128,5 +128,5 @@ interpreter switch/loop
   ]>]
  >] next instruction
 move instructions to where they've been initially and add 31 back
-<<<[+++++ +++++ +++++ +++++ +++++ +++++ + [>>+<<-]<]
+<<<<[+++++ +++++ +++++ +++++ +++++ +++++ + [>>>+<<<-]<]
 < N
