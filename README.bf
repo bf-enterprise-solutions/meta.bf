@@ -29,7 +29,7 @@
   Clone the code:
   [shell:
    git clone https://github.com/bf-enterprise-solutions/meta.bf.git]
-  And build str.bf:
+  And build meta.bf:
   [shell:
    make all]
 
