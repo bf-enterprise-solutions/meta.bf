@@ -10,19 +10,22 @@
  - meta.bf reads input from the same places the Brainfuck
    interpreter/compiler running meta.bf does read it from.
  - Same for output.
- - meta.bf does not alter the memory layout of your program (except
-   for the layout of the code you make it execute).
+ - meta.bf does not alter the memory layout of your program.
+ -- Unless you make it run the code that does.
+ --- N terminates at the value the interpreted code set it to.
+ --- The code itself stays the same after meta.bf terminates.
+ ---- Unless it modified itself.
 
  With these properties, you can embed meta.bf into your BF program and
  enable it to read and execute arbitrary BF code with the same
  privileges as the code of the program itself and in the same memory
  cells.
 
- meta.bf is already used in ed.bf
- (https://github.com/bf-enterprise-solutions/ed.bf), UNIX ed
- re-implementation in Brainfuck, and in the OS.bf
- (https://github.com/bf-enterprise-solutions/os.bf), a full-fledged
- Brainfuck OS.
+ meta.bf is already used in
+ -ed.bf (https://github.com/bf-enterprise-solutions/ed.bf), UNIX ed
+  re-implementation in Brainfuck, and in the OS.bf
+ - os.bf (https://github.com/bf-enterprise-solutions/os.bf), a
+   full-fledged Brainfuck OS.
 
  [1 GETTING STARTED
 
