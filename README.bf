@@ -36,40 +36,68 @@
   Copy-paste it into your code and see the endless metacircularity of
   code fractals unfold before your very eyes!]
 
- [2 HOW META.BF WORKS
+ [2 MEMORY LAYOUT
 
   As for any sufficiently complex copy-paste-able Brainfuck program,
-  meta.bf requires a certain memory layout for the values it uses. The
-  layout is:
+  meta.bf requires a certain memory layout for the values it uses.
 
-  [0] [^N] [0] [0] [0] [F] [BF...] [0]
+  [ 2.1 PRE-INTERPRETATION MEMORY LAYOUT.
 
-  Which means:
+   [0] [^N] [0] [0] [0] [F] [BF...] [0]
 
-  - There should be at least one zero cell before the meaningful
-  meta.bf cells.
-  - N should be a non-zero cell containing the offset required to get
-  to the memory segment in which to alter values while executing
-  code via meta.bf.
-  -- Which means, you can evaluate code at maximum 255 cells away from
-  N for one byte implementations, or more on implementations with
-  bigger cells. That's by design. I'm not changing it.
+   Which means:
 
-  - Three zeroed padding cells.
-  - F should initially be set to zero.
-  -- This cell, moving across the evaluated code, is referred to as
-  case flag or instruction pointer in the code.
-  - BF is a possibly empty null-terminated sequence of characters to evaluate.
-  - Which means: you can theoretically use meta.bf to execute code
-  that modifies itself while executing.
-  -- What?
-  --- Yes. Enjoy.
+   - There should be at least one zero cell before the meaningful
+   meta.bf cells.
+   - N should be a non-zero cell containing the offset required to get
+   to the memory segment in which to alter values while executing
+   code via meta.bf.
+   -- Which means, you can evaluate code at maximum 255 cells away from
+   N for one byte implementations, or more on implementations with
+   bigger cells.
+   --- There might be a further modification that'd allow using 255
+   beacons to mark the memory segment to act on. It's a work in
+   progress with Q2 2025 ETA.
+   - Three zeroed padding cells.
+   - F should initially be set to zero.
+   -- This cell, moving across the evaluated code, is referred to as
+   case flag or instruction pointer in the code.
+   - BF is a possibly empty null-terminated sequence of characters to evaluate.
+   - Which means: you can theoretically use meta.bf to execute code
+   that modifies itself while executing.
+   -- What?
+   --- Yes. Enjoy.
 
-  Once you've put your data the way meta.bf requires, you can simply
-  copy-paste the code of meta.bf version you need into your program and
-  run it on your data. After meta.bf is done, the pointer stays at N and
-  the code to interpret stays the way it was before evaluation, so you
-  don't need to back anything up!]
+   Once you've put your data the way meta.bf requires, you can simply
+   copy-paste the code of meta.bf version you need into your program and
+   run it on your data. After meta.bf is done, the pointer stays at N and
+   the code to interpret stays the way it was before evaluation, so you
+   don't need to back anything up!]
+
+  [2.2 INTERPRETATION MEMORY LAYOUT
+
+   During the actual meta-interpretation of the code provided to
+   meta.bf, the layout structure is:
+
+   [N] [0] [P...] [0] [0] [F] [T...]
+
+   Where:
+   - N is the offset line.
+   - It's followed by a single zero cell separating offset from the
+     actual code.
+   - Following this offset, there's P (processed sector) with
+     instructions interpreted so far.
+   - Then there are three mostly-zero cells, the last of which is the
+     case flag (explained above).
+   - And, finally, there's a T (to be processed) sector starting with
+     the next character to interpret.
+
+   After the character is evaluated, the layout shifts:
+   [N] [0] [P...] [0]  [0] [F] [T1] [T...]
+   to
+   [N] [0] [P...] [PN] [0] [0] [F]  [T...]
+
+   Thus, meta.bf uses a three byte long shifting evaluation window.]]
 
  [3 META.BF VERSIONS/FILES:
 
