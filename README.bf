@@ -8,7 +8,7 @@
  language. Contrary to DBFI,
 
  - meta.bf reads input from the same places the Brainfuck
-   interpreter/compiler running meta.bf does read it from.
+ interpreter/compiler running meta.bf does read it from.
  - Same for output.
  - meta.bf does not alter the memory layout of your program.
  -- Unless you make it run the code that does.
@@ -22,10 +22,10 @@
  cells.
 
  meta.bf is already used in
- -ed.bf (https://github.com/bf-enterprise-solutions/ed.bf), UNIX ed
-  re-implementation in Brainfuck, and in the OS.bf
+ - ed.bf (https://github.com/bf-enterprise-solutions/ed.bf), UNIX ed
+ re-implementation in Brainfuck, and in the OS.bf
  - os.bf (https://github.com/bf-enterprise-solutions/os.bf), a
-   full-fledged Brainfuck OS.
+ full-fledged Brainfuck OS.
 
  [1 GETTING STARTED
 
@@ -87,13 +87,13 @@
    Where:
    - N is the offset line.
    - It's followed by a single zero cell separating offset from the
-     actual code.
+   actual code.
    - Following this offset, there's P (processed sector) with
-     instructions interpreted so far.
+   instructions interpreted so far.
    - Then there are three mostly-zero cells, the last of which is the
-     case flag (explained above).
+   case flag (explained above).
    - And, finally, there's a T (to be processed) sector starting with
-     the next character to interpret.
+   the next character to interpret.
 
    After the character is evaluated, the layout shifts:
    [N] [0] [P...] [0]  [0] [F] [T1] [T...]
