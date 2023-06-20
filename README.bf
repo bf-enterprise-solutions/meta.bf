@@ -100,7 +100,23 @@
    to
    [N] [0] [P...] [PN] [0] [0] [F]  [T...]
 
-   Thus, meta.bf uses a three byte long shifting evaluation window.]]
+   Thus, meta.bf uses a three byte long shifting evaluation window.]
+
+  [2.3 BRACKET SEARCH MEMORY LAYOUT
+
+   During the nested brackets traversal (both left- and right-hand),
+   meta.bf uses all the three bytes to keep search information. The
+   allocation of these bytes is:
+
+   [P...] [0] [B] [F] [T...]
+
+   Where:
+   - P and T are the familiar "processed" and "to be processed"
+   sectors.
+   - B is the bracket count. It's set to 1 initially, and increased
+   with every nested brackets level added.
+   - F is the case flag used to dispatch the opening bracket, closing
+   bracket, and everything else.]]
 
  [3 META.BF VERSIONS/FILES:
 
