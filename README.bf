@@ -23,7 +23,7 @@
 
  meta.bf is already used in
  - ed.bf (https://github.com/bf-enterprise-solutions/ed.bf), UNIX ed
- re-implementation in Brainfuck, and in the OS.bf
+ re-implementation in Brainfuck, and in
  - os.bf (https://github.com/bf-enterprise-solutions/os.bf), a
  full-fledged Brainfuck OS.
 
