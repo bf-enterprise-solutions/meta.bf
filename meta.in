@@ -37,6 +37,7 @@ interpreter switch/loop
           tovalue() value cell
           [fromvaluecell()
            < move to the last instruction
+           TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
            check it for being an opening bracket
            ----- ----- ----- ----- ----- -----
            ----- ----- ----- ----- ----- -----
@@ -50,6 +51,7 @@ interpreter switch/loop
            restore the bracket in place once hit
            +++++ +++++ +++++ +++++ +++++ +++++
            +++++ +++++ +++++ +++++ +++++ +++++
+           TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
            move to the value cell
            tovaluecell()
            tovalue()[fromvalue()+tovalue()-]] backup the value cell to N and exit
