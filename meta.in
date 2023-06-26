@@ -37,21 +37,40 @@ interpreter switch/loop
           tovalue() value cell
           [fromvaluecell()
            < move to the last instruction
-           TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-           check it for being an opening bracket
-           ----- ----- ----- ----- ----- -----
-           ----- ----- ----- ----- ----- -----
-           [ restore the value if it is not
-            +++++ +++++ +++++ +++++ +++++ +++++
-            +++++ +++++ +++++ +++++ +++++ +++++
-            [>>>+<<<-] copy it to the sector for further evaluation
-            subtract 91 from the next value
-            <     ----- ----- ----- ----- -----
-            ----- ----- ----- ----- ----- ----- -----] until opening bracket
-           restore the bracket in place once hit
-           +++++ +++++ +++++ +++++ +++++ +++++
-           +++++ +++++ +++++ +++++ +++++ +++++
-           TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+           [>>>+<<<-] copy it to be processed
+           >+ set up the bracket count
+           [<+ set up the case flag
+            <[switch:
+             opening bracket
+             ----- ----- ----- ----- ----- -----
+             ----- ----- ----- ----- ----- -----
+             [-- closing bracket
+              [default:
+               >-< kill flag
+               [>>>+<<<-] copy to be processed later
+              ]
+              >[ case closing bracket:
+               - kill the flag
+               >+ increase bracket count
+               >> ++ +++++ +++++ +++++ +++++ +++++ +++++
+               +++++ +++++ +++++ +++++ +++++ +++++ restore bracket
+               <<<
+              ]<
+             ]
+             >[ case opening bracket:
+              - kill the flag
+              >- decrease the bracket count
+              restore opening bracket
+              >>    +++++ +++++ +++++ +++++ +++++ +++++
+              +++++ +++++ +++++ +++++ +++++ +++++
+              <<< back to the flag
+             ]<
+            ]
+            >>[<+>-] move the bracket count
+            <] and loop while it's positive
+           we're at [P] [0] [B(0)^] [0] [opening bracket] [T]
+           >>[<<<+>>>-] copy the opening bracket to move inside it
+           <<< to the copied bracket
            move to the value cell
            tovaluecell()
            tovalue()[fromvalue()+tovalue()-]] backup the value cell to N and exit
