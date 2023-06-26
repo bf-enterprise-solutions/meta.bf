@@ -57,24 +57,50 @@ interpreter switch/loop
           fromvaluecell()
          ]>]
         < case opening bracket
-        [- kill the flag
+        [[-] kill the flag
+         + and set the bracket count instead of it
          restore 91 (opening bracket)
          <<    +++++ +++++ +++++ +++++ +++++
          +++++ +++++ +++++ +++++ +++++ +++++ +++++
-         check next instruction for being a closing bracket
-         >>>>  ----- ----- ----- ----- ----- --
-         ----- ----- ----- ----- ----- ----- -----
-         [restore the value if it is not
-          +++++ +++++ +++++ +++++ +++++ +++++
-          +++++ +++++ +++++ +++++ +++++ +++++ ++
-          [<<<+>>>-] copy it to the processed sector
-          subtract closing bracket (93 minus 31) from the next value
-          >  -- ----- ----- ----- ----- -----
-          ----- ----- ----- ----- ----- ----- -----]
-         restore the closing bracket in place to be processed next
-         +++++ +++++ +++++ +++++ +++++ +++++
-         +++++ +++++ +++++ +++++ +++++ +++++ ++
-         <<]>]
+         >> back to the bracket count
+         [ matching bracket search
+          >+ set case flag
+          >[switch:
+           opening bracket (91 minus 31)
+           ----- ----- ----- ----- ----- -----
+           ----- ----- ----- ----- ----- -----
+           [ closing bracket (93 minus 31)
+            --
+            [ default:
+             <-> kill the flag
+             [<<<+>>>-] copy the character to the processed sector
+             <<<++ +++++ +++++ +++++ +++++ +++++ +++++
+             +++++ +++++ +++++ +++++ +++++ +++++ >>>   restore the char
+            ]
+            <[ case closing bracket:
+             - kill the flag
+             <- subtract one from the bracket count
+             restore closing bracket in the processed sector
+             << ++ +++++ +++++ +++++ +++++ +++++ +++++
+             +++++ +++++ +++++ +++++ +++++ +++++
+             >>> back to the case flag
+            ]>
+           ]
+           <[ case opening bracket:
+            - kill the flag
+            <+ add one to the bracket count
+            restore opening bracket in the processed sector
+            <<    +++++ +++++ +++++ +++++ +++++
+            +++++ +++++ +++++ +++++ +++++ +++++ +++++
+            >>> back to the case flag
+           ]>
+          ]
+          <<[>+<-]> copy the bracket count closer and loop
+         ] matching bracket search ends
+         we're at [P] [closing bracket] [0] [B(0)^] [0] [T]
+         <<[>>>+<<<-] copy the closing bracket to be processed next
+         > back to the new fake case flag
+        ]>]
        < case greater than
        [- kill the flag
         restore the value (62 minus 31 or greater than)
