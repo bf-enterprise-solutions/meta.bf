@@ -47,6 +47,9 @@ interpreter switch/loop
              [-- closing bracket
               [default:
                >-< kill flag
+               restore the character
+               ++ +++++ +++++ +++++ +++++ +++++ +++++
+               +++++ +++++ +++++ +++++ +++++ +++++
                [>>>+<<<-] copy to be processed later
               ]
               >[ case closing bracket:
@@ -94,9 +97,10 @@ interpreter switch/loop
             --
             [ default:
              <-> kill the flag
+             restore the character
+             ++ +++++ +++++ +++++ +++++ +++++ +++++
+             +++++ +++++ +++++ +++++ +++++ +++++
              [<<<+>>>-] copy the character to the processed sector
-             <<<++ +++++ +++++ +++++ +++++ +++++ +++++
-             +++++ +++++ +++++ +++++ +++++ +++++ >>>   restore the char
             ]
             <[ case closing bracket:
              - kill the flag
