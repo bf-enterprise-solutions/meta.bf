@@ -144,6 +144,5 @@
   meta.repl.*.bf) minified REPL code.]
 
  [4 TO DO:
-  - Make it support nested loops.
   - Optimize layout and memory even more. Or revert all the
   optimizations for the sake of readability.]]

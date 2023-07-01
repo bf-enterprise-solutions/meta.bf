@@ -36,7 +36,7 @@ interpreter switch/loop
           to the opening bracket
           tovalue() value cell
           [fromvaluecell()
-           < move to the last instruction
+           << move to the last instruction
            [>>>+<<<-] copy it to be processed
            >+ set up the bracket count
            [<+ set up the case flag
@@ -55,18 +55,18 @@ interpreter switch/loop
               >[ case closing bracket:
                - kill the flag
                >+ increase bracket count
-               >> ++ +++++ +++++ +++++ +++++ +++++ +++++
+               > ++ +++++ +++++ +++++ +++++ +++++ +++++
                +++++ +++++ +++++ +++++ +++++ +++++ restore bracket
-               <<<
+               <<
               ]<
              ]
              >[ case opening bracket:
               - kill the flag
               >- decrease the bracket count
               restore opening bracket
-              >>    +++++ +++++ +++++ +++++ +++++ +++++
+              >     +++++ +++++ +++++ +++++ +++++ +++++
               +++++ +++++ +++++ +++++ +++++ +++++
-              <<< back to the flag
+              << back to the flag
              ]<
             ]
             >>[<+>-] move the bracket count
@@ -106,18 +106,18 @@ interpreter switch/loop
              - kill the flag
              <- subtract one from the bracket count
              restore closing bracket in the processed sector
-             << ++ +++++ +++++ +++++ +++++ +++++ +++++
+             <  ++ +++++ +++++ +++++ +++++ +++++ +++++
              +++++ +++++ +++++ +++++ +++++ +++++
-             >>> back to the case flag
+             >> back to the case flag
             ]>
            ]
            <[ case opening bracket:
             - kill the flag
             <+ add one to the bracket count
             restore opening bracket in the processed sector
-            <<    +++++ +++++ +++++ +++++ +++++
+            <     +++++ +++++ +++++ +++++ +++++
             +++++ +++++ +++++ +++++ +++++ +++++ +++++
-            >>> back to the case flag
+            >> back to the case flag
            ]>
           ]
           <<[>+<-]> copy the bracket count closer and loop
